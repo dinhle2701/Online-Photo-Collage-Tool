@@ -80,9 +80,9 @@ Online-Photo-Collage-Tool
 ### 2. Run Project
 Open Terminal and following:
 ## Frontend:
-![alt text](image-1.png)
-![alt text](image-3.png)
-![alt text](image.png)
+![alt text](docs/image-1.png)
+![alt text](docs/image-3.png)
+![alt text](docs/image.png)
 ```
     Type this into Terminal:
     cd frontend -> npm install -> npm start -> Enter
@@ -92,9 +92,9 @@ Link: http://localhost:3000
 ---
 ## Backend:
 Open Terminal, Docker and following:
-![alt text](image-1.png)
-![alt text](image-3.png)
-![alt text](image.png)
+![alt text](docs/image-1.png)
+![alt text](docs/image-3.png)
+![alt text](docs/image.png)
 
 ```
     Type this into Terminal:
