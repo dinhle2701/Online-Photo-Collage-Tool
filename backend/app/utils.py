@@ -1,6 +1,6 @@
 from PIL import Image, ImageOps
 
-def create_collage(images, layout='horizontal', outer_border_size=5, border_color='white'):
+def create_collage(images, layout, outer_border_size, border_color='white'):
     if layout not in ('horizontal', 'vertical'):
         raise NotImplementedError("Chỉ hỗ trợ layout 'horizontal' hoặc 'vertical'.")
 

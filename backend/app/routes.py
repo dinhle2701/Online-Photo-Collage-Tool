@@ -35,7 +35,7 @@ def create_task():
         image_paths.append(path)
 
     task = create_collage_task.apply_async(args=[image_paths, collage_type, border_thickness, border_color])
-    return jsonify({"task_id": task.id}), 202
+    return jsonify({"task_id": task.id}), 201
 
 
 @main.route('/check-status', methods=['GET'])
