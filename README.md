@@ -7,7 +7,7 @@
 ---
 
 
-## 📦 Features
+## 📦 **Features**
 
 - Upload and arrange images horizontally or vertically
 - Choose background color and border thickness
@@ -17,7 +17,7 @@
 
 ---
 
-## 🧰 Technologies Used
+## 🧰 **Technologies Used**
 
 - Frontend: ReactJS + TailwindCSS
 - Backend: Flask (Python)
@@ -26,24 +26,24 @@
 
 ---
 
-## 🛠️ Local Development 
+## 🛠️ **Local Development** 
 
-### 🔧 Requirements
+### 🔧 **Requirements**
 
 - Docker & Docker Compose
 - VSCode
 - Git
 
-### 📥 Clone project
+### 📥 **Clone project**
 
 ```bash
 git clone https://github.com/your-username/online-photo-collage.git
 cd online-photo-collage
 ```
 
-## 🛠️ Project Using Guide
+## 🛠️ **Project Using Guide**
 
-### 1. Project Structure
+### **1. Project Structure**
 ```
 Online-Photo-Collage-Tool
 ├── backend/  # Flask API - xử lý ảnh
@@ -77,7 +77,7 @@ Online-Photo-Collage-Tool
 └── .gitignore
 ```
 
-### 2. Run Project
+### **2. Run Project**
 Open Terminal and following:
 ## Frontend:
 ![alt text](docs/image-1.png)
