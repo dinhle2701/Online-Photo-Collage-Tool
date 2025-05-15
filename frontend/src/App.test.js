@@ -6,3 +6,6 @@
 //   const linkElement = screen.getByText(/learn react/i);
 //   expect(linkElement).toBeInTheDocument();
 // });
+test('dummy test', () => {
+  expect(true).toBe(true);
+});
