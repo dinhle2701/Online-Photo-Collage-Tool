@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import API_PATHS from '../../constant/apiPath.js';  // Giả sử bạn đã tạo API_PATHS như trước đó
 import axios from 'axios';  // Import Axios
