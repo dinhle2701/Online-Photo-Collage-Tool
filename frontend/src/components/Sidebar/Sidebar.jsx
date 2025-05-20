@@ -47,10 +47,10 @@ const Sidebar = ({ setCollageId }) => {
 
       setCollageId(data.task_id);
 
-      // setImages([]);
-      // setLayout("");
-      // setBorderThickness("");
-      // setBorderColor("");
+      setImages([]);
+      setLayout("");
+      setBorderThickness("");
+      setBorderColor("");
       
     } catch (err) {
       console.error("❌ Lỗi tạo task:", err);
