@@ -1,4 +1,17 @@
 from PIL import Image, ImageOps
+import re
+
+def parse_color(color_str):
+    """
+    Chuyển chuỗi màu CSS (rgb/rgba/hex/tên màu) thành tuple RGB.
+    """
+    if isinstance(color_str, tuple):
+        return color_str  # Đã là tuple sẵn
+    if color_str.startswith("rgb"):
+        nums = list(map(float, re.findall(r"[\d.]+", color_str)))
+        if len(nums) >= 3:
+            return tuple(map(int, nums[:3]))  # Lấy R, G, B
+    return color_str  # Giữ nguyên nếu là tên màu hợp lệ như 'white'
 
 def create_collage(images, layout, outer_border_size, border_color='white'):
     if layout not in ('horizontal', 'vertical'):
@@ -52,7 +65,8 @@ def create_collage(images, layout, outer_border_size, border_color='white'):
 
     # Add outer border
     if outer_border_size > 0:
-        collage = ImageOps.expand(collage, border=outer_border_size, fill=border_color)
-        print(f"[DEBUG] Added outer border of size {outer_border_size}, color: {border_color}")
+        parsed_color = parse_color(border_color)
+        collage = ImageOps.expand(collage, border=outer_border_size, fill=parsed_color)
+        print(f"[DEBUG] Added outer border of size {outer_border_size}, color: {parsed_color}")
 
     return collage
