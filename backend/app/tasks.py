@@ -17,7 +17,7 @@ def delete_file_later(path):
         print(f"[ERROR] Error deleting file {path}: {e}")
 
 @celery.task(bind=True, max_retries=3)
-def create_collage_task(self, image_paths, layout, border_size, border_color):
+def create_collage_task(self, image_paths, layout, outer_border_size, border_color):
     try:
         collage_id = str(uuid.uuid4())
         collage_path = os.path.abspath(os.path.join('static', f"{collage_id}.jpg"))

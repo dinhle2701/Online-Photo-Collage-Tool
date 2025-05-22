@@ -15,13 +15,36 @@ const Sidebar = ({ setCollageId }) => {
     setImages((prevImages) => prevImages.filter((_, index) => index !== indexToRemove));
   };
 
-  const [layout, setLayout] = useState('horizontal');
-  const [border_thickness, setBorderThickness] = useState('12');
-  const [border_color, setBorderColor] = useState('#ffffff');
+  const [layout, setLayout] = useState('');
+  const [border_thickness, setBorderThickness] = useState('');
+  const [border_color, setBorderColor] = useState('');
+
+  function isValidColor(color) {
+    const cssColorTest = new Option().style;
+    cssColorTest.color = color;
+    if (cssColorTest.color !== '') return true;
+
+    // Kiểm tra định dạng rgb hoặc rgba
+    const rgbRegex = /^rgba?\(\s*(\d{1,3}\s*,\s*){2}\d{1,3}(,\s*\d+(\.\d+)?)?\s*\)$/;
+    return rgbRegex.test(color);
+  }
+
+
+
 
   const handleSubmit = async () => {
     if (!layout || images.length === 0) {
       alert("Vui lòng chọn ít nhất 1 ảnh và loại ảnh ghép.");
+      return;
+    }
+
+    if (border_thickness === '' || isNaN(border_thickness)) {
+      alert("📏 Độ dày viền không hợp lệ. Vui lòng nhập số trong khoảng 0 - 1000.");
+      return;
+    }
+
+    if (!isValidColor(border_color)) {
+      alert("🎨 Màu không hợp lệ. Vui lòng nhập màu như 'white', 'rgb(255,255,255)' hoặc 'rgba(255,255,255,0.5)'.\nKhông hỗ trợ định dạng '#ffffff'.");
       return;
     }
 
@@ -44,18 +67,18 @@ const Sidebar = ({ setCollageId }) => {
       console.log("✅ Task tạo thành công:", data);
       localStorage.setItem("task_id", data.task_id);
       alert("Task tạo thành công!");
-
       setCollageId(data.task_id);
 
       setImages([]);
-      setLayout('horizontal');
-      setBorderThickness('12');
-      setBorderColor('#ffffff');
+      setLayout('');
+      setBorderThickness('');
+      setBorderColor('');
     } catch (err) {
       console.error("❌ Lỗi tạo task:", err);
       alert("Có lỗi xảy ra khi gửi task.");
     }
   };
+
 
   return (
     <div className='sidebar bg-white rounded-lg py-4 px-4 sm:px-6 w-full max-w-md mx-auto'>
@@ -130,7 +153,6 @@ const Sidebar = ({ setCollageId }) => {
           max="1000"
           placeholder="0 - 1000"
           className="w-full border px-2 py-1 rounded"
-          required
         />
 
         <label className="md:text-end">Color</label>
@@ -140,7 +162,6 @@ const Sidebar = ({ setCollageId }) => {
           onChange={(e) => setBorderColor(e.target.value)}
           className="w-full border px-2 py-1 rounded"
           placeholder="e.g. #9c88ff, rgb(156,136,255), white"
-          required
         />
       </div>
 

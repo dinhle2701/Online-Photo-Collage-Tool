@@ -28,6 +28,9 @@ const Content = () => {
         if (!taskId) return;
 
         const checkStatusAndFetchImage = async () => {
+            setLoading(true);
+            setError(null);
+
             try {
                 const statusRes = await axios.get(`${API_PATHS.CHECK_STATUS}?task_id=${taskId}`);
                 const { status, collage_url } = statusRes.data;
@@ -39,9 +42,18 @@ const Content = () => {
 
                     const imgUrl = URL.createObjectURL(collageRes.data);
                     setImageUrl(imgUrl);
+                    setLoading(false);
+                } else if (status === 'FAILURE') {
+                    setError('Xử lý ảnh thất bại.');
+                    setLoading(false);
+                } else {
+                    // Nếu status vẫn đang xử lý (e.g. PENDING), thì đợi tiếp
+                    setTimeout(checkStatusAndFetchImage, 2000); // tiếp tục check lại sau 2 giây
                 }
             } catch (err) {
                 console.error('❌ Lỗi khi check status:', err);
+                setError('Lỗi khi kiểm tra trạng thái task.');
+                setLoading(false);
             }
         };
 
@@ -49,16 +61,19 @@ const Content = () => {
     }, [taskId]);
 
 
+
     return (
         <div className="content bg-white px-3 rounded-lg">
             <div className="content-image-container p-6">
                 {/* Bên phải */}
                 <div className=" bg-slate-200 h-96 flex justify-center items-center mt-20 p-5">
-                    <div className="image-display">
+                    <div className="image-display text-center">
                         {loading ? (
-                            <p>Đang xử lý...</p>
+                            <div className="text-gray-700 animate-pulse">
+                                <p className="text-lg font-medium">⏳ Đang xử lý ảnh...</p>
+                            </div>
                         ) : error ? (
-                            <p>{error}</p>
+                            <p className="text-red-600">{error}</p>
                         ) : imageUrl ? (
                             <img
                                 src={imageUrl}
@@ -66,10 +81,11 @@ const Content = () => {
                                 className="max-w-full max-h-[400px] object-contain rounded-lg"
                             />
                         ) : (
-                            <p>Chưa có ảnh ghép.</p>
+                            <p className="text-gray-500">Chưa có ảnh ghép.</p>
                         )}
                     </div>
                 </div>
+
             </div>
 
             {imageUrl && !loading && (

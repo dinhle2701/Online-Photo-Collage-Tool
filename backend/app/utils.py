@@ -13,7 +13,7 @@ def parse_color(color_str):
             return tuple(map(int, nums[:3]))  # Lấy R, G, B
     return color_str  # Giữ nguyên nếu là tên màu hợp lệ như 'white'
 
-def create_collage(images, layout, outer_border_size, border_color='white'):
+def create_collage(images, layout, outer_border_size, border_color):
     if layout not in ('horizontal', 'vertical'):
         raise NotImplementedError("Chỉ hỗ trợ layout 'horizontal' hoặc 'vertical'.")
 
